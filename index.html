@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Văn Nghệ OHK 2026</title>
+<title>Văn Nghệ OHK 2026 – Đống Đa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -385,17 +385,15 @@
     justify-content: center;
   }
 
-  /* === CLASS COLOR CHIPS === */
-  .chip-little     { background: #FFF3E0; color: #E65100; }
-  .chip-preschool  { background: #E3F2FD; color: #1565C0; }
-  .chip-explorer   { background: #E8F5E9; color: #2E7D32; }
-  .chip-adventurer { background: #F3E5F5; color: #6A1B9A; }
+  .chip-auto       { background: #EEF6FF; color: #1A5FA8; }
   .chip-video      { background: #FCE4EC; color: #880E4F; }
+  .chip-merbaby    { background: #E3F2FD; color: #0277BD; }
+  .chip-dory-jelly { background: #E8F5E9; color: #2E7D32; }
   .chip-grad       { background: #FFF8E1; color: #F57F17; }
-  .chip-starfish   { background: #E3F2FD; color: #0277BD; }
+  .chip-starfish   { background: #E1F5FE; color: #0288D1; }
   .chip-tuna       { background: #E8F5E9; color: #2E7D32; }
   .chip-jellyfish  { background: #EDE7F6; color: #512DA8; }
-  .chip-dory       { background: #E1F5FE; color: #0288D1; }
+  .chip-dory       { background: #E0F7FA; color: #00838F; }
 
   /* === ADMIN PANEL === */
   .admin-btn {
@@ -691,7 +689,7 @@
       <div class="rainbow-dot"></div>
     </div>
 
-    <h1>Văn Nghệ <em>OHK</em><br>🎭</h1>
+    <h1>Văn Nghệ <em>OHK</em><br>Đống Đa 🎭</h1>
     <div class="header-sub">Lễ Tổng Kết Năm Học 2025 – 2026</div>
 
     <div class="event-info">
@@ -791,7 +789,6 @@ const CLASS_CHIPS = {
   dory:      { icon: '🐠', label: 'Dory',                                       css: 'chip-dory'       },
   jellydory: { icon: '🐠', label: 'Jellyfish và Dory',                          css: 'chip-jellyfish'  },
 };
-
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyDWPVHS3ryGYnmu7th2bXVDHcPw7qQK2Zg",
   authDomain: "ohana-7bf33.firebaseapp.com",
@@ -860,7 +857,7 @@ function renderList() {
   PERFORMANCES.forEach((p, i) => {
     const isActive = currentActive === p.id;
     const isDone = doneSet.has(p.id);
-    const chip = CLASS_CHIPS[p.type] || { label: p.cls, cls: 'chip-preschool' };
+    const ch = CLASS_CHIPS[p.chip] || null;
 
     const card = document.createElement('div');
     card.className = 'perf-card' + (isActive ? ' active' : '') + (isDone && !isActive ? ' done' : '');
@@ -870,7 +867,7 @@ function renderList() {
       <div class="perf-num">${p.stt}</div>
       <div class="perf-body">
         <div class="perf-title">${p.title}</div>
-        ${p.cls ? `<div class="perf-class"><span class="class-chip ${chip.cls}">${chip.label}</span></div>` : ''}
+        ${ch ? `<div class="perf-class"><span class="class-chip ${ch.css}">${ch.icon} ${ch.label}</span></div>` : ''}
       </div>
       <div class="perf-right">
         ${isActive ? `
@@ -902,13 +899,14 @@ function renderCtrlList() {
     const isSelected = currentActive === p.id;
     const isDone = doneSet.has(p.id);
 
+    const ch = CLASS_CHIPS[p.chip] || null;
     const item = document.createElement('div');
     item.className = 'ctrl-item' + (isSelected ? ' selected' : '');
     item.onclick = () => setActive(p.id);
 
     item.innerHTML = `
       <div class="ctrl-num">${p.stt}</div>
-      <div class="ctrl-text">${p.title} <small>${p.cls || 'Mở màn'}</small></div>
+      <div class="ctrl-text">${p.title} <small>${ch ? ch.icon + ' ' + ch.label : ''}</small></div>
       <button class="ctrl-done-btn ${isDone ? 'checked' : ''}" onclick="toggleDone(event, ${p.id})">
         ${isDone ? '<svg width="14" height="14" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
       </button>
