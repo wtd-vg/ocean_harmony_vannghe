@@ -764,30 +764,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
 <script>
 const PERFORMANCES = [
-  { id:  1, stt: '1',  title: 'Video Một ngày đi học của HS OHK',                    cls: '',                          type: 'video' },
-  { id:  2, stt: '2',  title: 'Biểu diễn thời trang',                                cls: 'Merbaby và Starfish 2',      type: 'starfish' },
-  { id:  3, stt: '3',  title: 'Múa "Thịnh Vượng Việt Nam sáng ngời"',               cls: 'Dory và Jellyfish cùng các cô giáo', type: 'teacher' },
-  { id:  4, stt: '4▸', title: 'Hát "Thank you song"',                                cls: 'Tốt nghiệp lớp Dory',       type: 'grad' },
-  { id:  5, stt: '4▸', title: 'Hát "Gia đình nhỏ, hạnh phúc to"',                   cls: 'Tốt nghiệp lớp Dory',       type: 'grad' },
-  { id:  6, stt: '4▸', title: 'Trao bằng tốt nghiệp 🎓',                            cls: 'Tốt nghiệp lớp Dory',       type: 'grad' },
-  { id:  7, stt: '5',  title: 'Nhảy "Bé yêu biển lắm"',                             cls: 'Starfish 1',                type: 'starfish' },
-  { id:  8, stt: '6',  title: 'Múa "Dung dăng dung dẻ"',                            cls: 'Tuna',                      type: 'tuna' },
-  { id:  9, stt: '7',  title: 'Nhảy "Bumble Bee"',                                  cls: 'Jellyfish',                 type: 'jellyfish' },
-  { id: 10, stt: '8',  title: 'Nhạc kịch "Cô bé quàng khăn đỏ"',                   cls: 'Dory',                      type: 'dory' },
-  { id: 11, stt: '9',  title: 'Vận động theo nhạc "Roll Your Hand"',                cls: 'Starfish 1',                type: 'starfish' },
-  { id: 12, stt: '10', title: 'Vận động theo nhạc "Such a happy day"',              cls: 'Tuna',                      type: 'tuna' },
-  { id: 13, stt: '11', title: 'Hát "Top of the world"',                             cls: 'Jellyfish và Dory',         type: 'jellyfish' },
-  { id: 14, stt: '12', title: 'Nhảy "Mashup Viết tiếp câu chuyện hòa bình"',       cls: 'Dory',                      type: 'dory' },
+  { id:  1, stt: '1',  title: 'Video Một ngày đi học của HS OHK',                    chip: 'video'     },
+  { id:  2, stt: '2',  title: 'Biểu diễn thời trang',                                chip: 'merbaby'   },
+  { id:  3, stt: '3',  title: 'Múa "Thịnh Vượng Việt Nam sáng ngời"',               chip: 'doryjelly' },
+  { id:  4, stt: '4▸', title: 'Hát "Thank you song"',                                chip: 'grad'      },
+  { id:  5, stt: '4▸', title: 'Hát "Gia đình nhỏ, hạnh phúc to"',                   chip: 'grad'      },
+  { id:  6, stt: '4▸', title: 'Trao bằng tốt nghiệp 🎓',                            chip: 'grad'      },
+  { id:  7, stt: '5',  title: 'Nhảy "Bé yêu biển lắm"',                             chip: 'starfish1' },
+  { id:  8, stt: '6',  title: 'Múa "Dung dăng dung dẻ"',                            chip: 'tuna'      },
+  { id:  9, stt: '7',  title: 'Nhảy "Bumble Bee"',                                  chip: 'jellyfish' },
+  { id: 10, stt: '8',  title: 'Nhạc kịch "Cô bé quàng khăn đỏ"',                   chip: 'dory'      },
+  { id: 11, stt: '9',  title: 'Vận động theo nhạc "Roll Your Hand"',                chip: 'starfish1' },
+  { id: 12, stt: '10', title: 'Vận động theo nhạc "Such a happy day"',              chip: 'tuna'      },
+  { id: 13, stt: '11', title: 'Hát "Top of the world"',                             chip: 'jellydory' },
+  { id: 14, stt: '12', title: 'Nhảy "Mashup Viết tiếp câu chuyện hòa bình"',       chip: 'dory'      },
 ];
 
 const CLASS_CHIPS = {
-  video:    { label: '📹 Video',                    cls: 'chip-video' },
-  starfish: { label: '⭐ Starfish / Merbaby',       cls: 'chip-starfish' },
-  teacher:  { label: '🌸 Dory + Jellyfish + Cô',   cls: 'chip-preschool' },
-  grad:     { label: '🎓 Tốt nghiệp lớp Dory',     cls: 'chip-grad' },
-  tuna:     { label: '🐟 Tuna',                     cls: 'chip-tuna' },
-  jellyfish:{ label: '🪼 Jellyfish',               cls: 'chip-jellyfish' },
-  dory:     { label: '🐠 Dory',                     cls: 'chip-dory' },
+  video:     { icon: '📹', label: 'Video',                                      css: 'chip-video'      },
+  merbaby:   { icon: '🧜', label: 'Merbaby và Starfish 2',                      css: 'chip-merbaby'    },
+  doryjelly: { icon: '🌊', label: 'Dory và Jellyfish cùng các cô giáo',         css: 'chip-dory-jelly' },
+  grad:      { icon: '🎓', label: 'Tốt nghiệp lớp Dory',                       css: 'chip-grad'       },
+  starfish1: { icon: '⭐', label: 'Starfish 1',                                 css: 'chip-starfish'   },
+  tuna:      { icon: '🐟', label: 'Tuna',                                       css: 'chip-tuna'       },
+  jellyfish: { icon: '🪼', label: 'Jellyfish',                                  css: 'chip-jellyfish'  },
+  dory:      { icon: '🐠', label: 'Dory',                                       css: 'chip-dory'       },
+  jellydory: { icon: '🐠', label: 'Jellyfish và Dory',                          css: 'chip-jellyfish'  },
 };
 
 const FIREBASE_CONFIG = {
